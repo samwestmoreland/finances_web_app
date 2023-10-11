@@ -1,14 +1,22 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/csv"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"io"
 	"log"
 	"net/http"
 )
 
 func main() {
+	db, err := sql.Open("mysql", "user:alabama@tcp(localhost:3306)/transactions")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/upload", uploadHandler)
 
