@@ -26,7 +26,7 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello World"))
+	http.ServeFile(w, r, "index.html")
 }
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
